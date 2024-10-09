@@ -14,7 +14,15 @@ var usersRouter = require('./routes/users');
 
 // 导入配置路由
 const loginRouter = require('./routes/login');
-const userRouter= require('./routes/userinfo')
+const userRouter = require('./routes/userinfo')
+const setRouter = require('./routes/setting')
+const productRouter = require('./routes/product')
+const messageRouter = require('./routes/message')
+const fileRouter = require('./routes/file')
+const loginLog = require('./routes/login_log')
+const openRouter = require('./routes/openration_log')
+const overviewRouter = require('./routes/overview')
+const departmentRouter = require('./routes/department')
 // 导入JWT
 const jwtconfig = require('./jwt-config/index')
 // ES6的解构赋值语法
@@ -24,7 +32,7 @@ const joi = require('joi');
 //  multer 用来上传文件
 const multer = require('multer')
 // 在public下的upload文件夹存储
-const upload=multer({dest:'./public/upload'})
+const upload = multer({ dest: './public/upload' })
 
 
 var app = express();
@@ -79,17 +87,26 @@ app.use((req, res, next) => {
 
 // 注册路由
 app.use('/api', loginRouter)
-app.use('/user',userRouter)
+app.use('/user', userRouter)
+app.use('/set', setRouter)
+app.use('/pro', productRouter)
+app.use('/msg', messageRouter)
+app.use('/file', fileRouter)
+app.use('/llog', loginLog)
+app.use('/olog', openRouter)
+app.use('/ov', overviewRouter)
+app.use('/dm', departmentRouter)
+
 
 // 对不符合joi验证规则的情况进行报错
 app.use((req, res, next) => {
   if (err instanceof joi.ValidationError) {
     console.log('joi');
-    
+
     return res.cc(err)
   }
 })
- 
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

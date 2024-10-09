@@ -12,13 +12,6 @@ const { login_limit } = require('../limit/login')
 // 导入路由处理模块
 const loginHandler = require('../router_handle/login')
 
-router.get('/', function (req, res, next) {
-    res.send("1111")
-});
-
-router.get('/ok', function (req, res, next) {
-    res.send("222")
-});
 
 // 注册路由
 router.post('/register', expressJoi(login_limit), loginHandler.register)
